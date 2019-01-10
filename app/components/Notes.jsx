@@ -1,11 +1,13 @@
 import React from 'react';
 
+import Note from './Note';
+
 export default ({ notes }) => (
   <ul>
     {
       notes.map(item => (
         <li key={item.id}>
-          {item.task}
+          <Note task={item.task}/>
         </li>
       ))
     }
