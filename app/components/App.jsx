@@ -11,7 +11,10 @@ export default class App extends React.Component{
     return (
       <div>
         <button onClick={this.addNote}>Add new note</button>
-        <Notes notes={ this.state.notes } />
+        <Notes
+          notes={ this.state.notes }
+          onDelete={this.deleteNote}
+        />
       </div>
     );
   }
@@ -22,6 +25,14 @@ export default class App extends React.Component{
         id: uuid.v4(),
         task: 'New task',
       }),
+    });
+  }
+
+  deleteNote = (id, e) => {
+    e.stopPropagation();
+    console.log(id)
+    this.setState({
+      notes: this.state.notes.filter(note => note.id != id),
     });
   }
 }

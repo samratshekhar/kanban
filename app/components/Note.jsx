@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default ({task}) => (
+export default ({task, onDelete}) => (
   <div>
     <span>{task}</span>
-    <button>x</button>
+    <button onClick={onDelete}>x</button>
   </div>
 )
