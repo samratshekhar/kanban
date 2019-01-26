@@ -7,12 +7,16 @@ export default ({ notes, onDelete = () => {} }) => (
     {
       notes.map(item => (
         <li key={item.id}>
-          <Note
-            task={item.task}
-            onDelete={onDelete.bind(null, item.id)}
-          />
+          <Note>
+            <span>{item.task}</span>
+            <button onClick={onDelete.bind(null, item.id)}>x</button>
+          </Note>
         </li>
       ))
     }
   </ul>
 )
+
+
+
+
