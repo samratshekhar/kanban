@@ -14,6 +14,8 @@ export default class App extends React.Component{
         <Notes
           notes={ this.state.notes }
           onDelete={this.deleteNote}
+          onNoteClick={this.onNoteClick}
+          onEdit={this.onEdit}
         />
       </div>
     );
@@ -30,9 +32,31 @@ export default class App extends React.Component{
 
   deleteNote = (id, e) => {
     e.stopPropagation();
-    console.log(id)
     this.setState({
       notes: this.state.notes.filter(note => note.id != id),
     });
+  }
+
+  onNoteClick = (id, e) => {
+    this.setState({
+      notes: this.state.notes.map((note) => {
+        if(note.id === id) {
+          note.editing = true;
+        }
+        return note;
+      })
+    })
+  }
+
+  onEdit = (id, task) => {
+    this.setState({
+      notes: this.state.notes.map((note) => {
+        if(note.id === id) {
+          note.editing = false;
+          note.task = task;
+        }
+        return note;
+      })
+    })
   }
 }

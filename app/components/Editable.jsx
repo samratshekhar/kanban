@@ -7,16 +7,32 @@ export default ({editing, value, onEdit, ...props}) => {
     );
   }
   return (
-    <span {...props}>value: {value}</span>
+    <span {...props}>{value}</span>
   )
 }
 
-const Edit = ({value, onEdit, ...props}) => {
-  return (
-    <div onClick={onEdit} {...props}>
-      <span>
-        edit: {value}
+class Edit extends React.Component {
+  onKeyPress = (e) => {
+    if(e.key === 'Enter') {
+      this.onFinishEditing(e);
+    }
+  }
+
+  onFinishEditing = (e) => {
+    this.props.onEdit(e.target.value)
+  }
+  render() {
+    const {value, onEdit, ...props} = this.props;
+    return (
+      <span {...props}>
+        <input
+          type='text'
+          autoFocus={true}
+          defaultValue={value}
+          onKeyPress={this.onKeyPress}
+          onBlur={this.onFinishEditing}
+        />
       </span>
-    </div>
-  )
+    )
+  }
 }
