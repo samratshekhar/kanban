@@ -54,6 +54,8 @@
     "webpack-validator": "^2.2.0"
   },
   "dependencies": {
+    "class": "^0.1.4",
+    "classnames": "^2.2.6",
     "react": "^15.1.0",
     "react-dom": "^15.1.0"
   }

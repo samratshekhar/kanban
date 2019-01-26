@@ -10,7 +10,7 @@ export default class App extends React.Component{
   render() {
     return (
       <div>
-        <button onClick={this.addNote}>Add new note</button>
+        <button className='add-note' onClick={this.addNote}>Add new note</button>
         <Notes
           notes={ this.state.notes }
           onDelete={this.deleteNote}
