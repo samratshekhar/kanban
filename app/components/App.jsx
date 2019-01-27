@@ -3,7 +3,7 @@ import uuid from 'uuid';
 
 import Notes from './Notes';
 import { data } from '../data';
-import connect from '../libs/connect';
+import connect from '../lib/connect';
 
 class App extends React.Component{
   state = { notes: data };
