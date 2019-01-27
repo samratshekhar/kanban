@@ -5,26 +5,28 @@ import NoteActions from '../actions/NoteActions';
 export default class NoteStore {
   constructor() {
     this.bindActions(NoteActions);
-    this.notes = [
-      {
-        id: uuid.v4(),
-        task: 'Task 1'
-      },
-      {
-        id: uuid.v4(),
-        task: 'Task 2'
-      }
-    ];
+    this.state = {
+      notes: [
+        {
+          id: uuid.v4(),
+          task: 'Task 1'
+        },
+        {
+          id: uuid.v4(),
+          task: 'Task 2'
+        }
+      ],
+    };
   }
 
   create(note) {
     this.setState({
-      notes: this.notes.concat(note),
+      notes: this.state.notes.concat(note),
     });
   }
   update(updatedNote) {
     this.setState({
-      notes: this.notes.map(note => {
+      notes: this.state.notes.map(note => {
         if (note.id === updatedNote.id) {
           return Object.assign({}, note, updatedNote);
         }
@@ -34,7 +36,7 @@ export default class NoteStore {
   }
   delete(id) {
     this.setState({
-      notes: this.notes.filter(note => note.id !== id)
+      notes: this.state.notes.filter(note => note.id !== id)
     });
   }
 }
