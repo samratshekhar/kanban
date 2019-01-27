@@ -2,18 +2,16 @@ import React from 'react';
 import uuid from 'uuid';
 
 import Notes from './Notes';
-import { data } from '../data';
 import connect from '../lib/connect';
 
 class App extends React.Component{
-  state = { notes: data };
-
   render() {
+    const { notes } = this.props;
     return (
       <div>
         <button className='add-note' onClick={this.addNote}>Add new note</button>
         <Notes
-          notes={ this.state.notes }
+          notes={ notes }
           onDelete={this.deleteNote}
           onNoteClick={this.onNoteClick}
           onEdit={this.onEdit}
@@ -62,6 +60,6 @@ class App extends React.Component{
   }
 }
 
-export default connect(() => ({
-  test: 'test',
+export default connect(({notes}) => ({
+  notes,
 }))(App);
