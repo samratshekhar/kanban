@@ -3,8 +3,9 @@ import uuid from 'uuid';
 
 import Notes from './Notes';
 import { data } from '../data';
+import connect from '../libs/connect';
 
-export default class App extends React.Component{
+class App extends React.Component{
   state = { notes: data };
 
   render() {
@@ -60,3 +61,7 @@ export default class App extends React.Component{
     })
   }
 }
+
+export default connect(() => ({
+  test: 'test',
+}))(App);
