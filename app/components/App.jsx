@@ -22,12 +22,6 @@ class App extends React.Component{
   }
 
   addNote = () => {
-    // this.setState({
-    //   notes: this.state.notes.concat({
-    //     id: uuid.v4(),
-    //     task: 'New task',
-    //   }),
-    // });
     this.props.NoteActions.create({
       id: uuid.v4(),
       task: 'New task'
@@ -36,32 +30,17 @@ class App extends React.Component{
 
   deleteNote = (id, e) => {
     e.stopPropagation();
-    this.setState({
-      notes: this.state.notes.filter(note => note.id != id),
-    });
+    this.props.NoteActions.delete(id);
   }
 
   onNoteClick = (id, e) => {
-    this.setState({
-      notes: this.state.notes.map((note) => {
-        if(note.id === id) {
-          note.editing = true;
-        }
-        return note;
-      })
-    })
+    e.stopPropagation();
+    this.props.NoteActions.update({id, editing: true});
+
   }
 
   onEdit = (id, task) => {
-    this.setState({
-      notes: this.state.notes.map((note) => {
-        if(note.id === id) {
-          note.editing = false;
-          note.task = task;
-        }
-        return note;
-      })
-    })
+    this.props.NoteActions.update({id, task, editing: false});
   }
 }
 
