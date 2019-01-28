@@ -1,14 +1,12 @@
 import React from 'react';
-import uuid from 'uuid';
 
 import connect from '.././lib/connect';
 import NoteActions from '../actions/NoteActions';
 import LaneActions from '../actions/LaneActions';
 import Notes from './Notes';
+import LaneHeader from './LaneHeader';
 
 class Lane extends React.Component {
-  // ({ lane, ...props}) =>
-
   render() {
     const {
       notes,
@@ -16,35 +14,15 @@ class Lane extends React.Component {
     } = this.props;
     return (
       <div>
-        <div className='lane-header'>
-          <button className='add-note' onClick={this.addNote}>+</button>
-          <span className='lane-name'>{Lane.name}</span>
-        </div>
-          <Notes
-            notes={ this.selectNotesById(notes, lane.notes) }
-            onDelete={this.deleteNote}
-            onNoteClick={this.onNoteClick}
-            onEdit={this.onEdit}
-          />
+        <LaneHeader lane={lane} />
+        <Notes
+          notes={ this.selectNotesById(notes, lane.notes) }
+          onDelete={this.deleteNote}
+          onNoteClick={this.onNoteClick}
+          onEdit={this.onEdit}
+        />
       </div>
     );
-  }
-
-  addNote = () => {
-    const {
-      NoteActions,
-      LaneActions,
-      lane,
-    } = this.props;
-    const noteId = uuid.v4();
-    NoteActions.create({
-      id: noteId,
-      task: 'New task'
-    });
-    LaneActions.attachToLane({
-      laneId: lane.id,
-      noteId
-    });
   }
 
   deleteNote = (id, e) => {
