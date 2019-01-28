@@ -11,13 +11,13 @@ export default class LaneHeader extends React.Component {
     return (
       <div className='lane-header' onClick={this.activateLaneEdit}>
         <button className='add-note' onClick={this.addNote}>+</button>
-        <span className='lane-name'>{}</span>
         <Editable
-          className='editable'
+          className='lane-name'
           editing={lane.editing}
           value={lane.name}
           onEdit={this.updateLaneName}
         />
+        <button className='lane-delete' onClick={this.deleteLane}>x</button>
       </div>
     );
   }
@@ -50,6 +50,11 @@ export default class LaneHeader extends React.Component {
       name: updatedName,
       editing: false,
     })
+  }
+
+  deleteLane = () => {
+    const { lane } = this.props;
+    LaneActions.delete({ id: lane.id })
   }
 }
 

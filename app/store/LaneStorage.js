@@ -26,6 +26,14 @@ export default class LaneStorage {
     })
   }
 
+  delete({ id }) {
+    this.setState({
+      lanes: this.state.lanes.filter(lane => {
+        lane.id !== id
+      }),
+    })
+  }
+
   attachToLane({ laneId, noteId }) {
     this.setState({
       lanes: this.state.lanes.map(lane => {
